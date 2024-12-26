@@ -20,7 +20,7 @@ print("Document page length:", len(docs))
 
 # Split it into chuncks with overlap
 text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=500, chunk_overlap=50, add_start_index=True
+    chunk_size=1000, chunk_overlap=200, add_start_index=True
 )
 all_splits = text_splitter.split_documents(docs)
 print("Total chunks", len(all_splits))
@@ -32,7 +32,7 @@ vector_store = InMemoryVectorStore(embedding=embeddings)
 ids = vector_store.add_documents(documents=all_splits)
 print(f"Added {len(ids)} documents to the vector store.")
 
-query = "What does estimator comparison do?"
+query = "I want the last page of the document"
 results = vector_store.similarity_search(query, k=1)
 
 print("Top result:", results[0])
